@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django Web-Site</title>
+</head>
+
+<body>
+<form action="{% url 'thanks_page' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+  <!--<fieldset>
+    <legend>Контактная информация</legend>
+    <p><label for="name">Имя <em>*</em></label><input type="text" name="name"></p>
+    <p><label for="phone">Телефон</label><input type="text" name="phone"></p>
+  </fieldset>-->
+<p><input type="submit" value="Отправить"></p>
+</form>
+<h1>Новая страница</h1>
+{% if object_list %}
+<table border="collapse">
+<tr>
+  <th>ID</th>
+  <th>Дата</th>
+  <th>Имя</th>
+  <th>Телефон</th>
+  </tr>
+{% for obj in object_list %}
+    <tr>
+      <th>{{ obj.id }}</th>
+      <th>{{ obj.order_dt }}</th>
+      <th>{{ obj.order_name }}</th>
+      <th>{{ obj.order_phone }}</th>
+    </tr>
+{% endfor %}
+    {% else %}
+    NO list
+{% endif %}
+</table>
+</body>
+</html>
